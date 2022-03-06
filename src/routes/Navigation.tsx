@@ -1,49 +1,46 @@
+import { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Routes, Route, Navigate, NavLink } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import { CustomLink } from "../components/CustomLinks";
 import logo from "../logo.svg";
+import { routes } from "./routes";
 
 export const Navigation = () => {
   return (
-    <>
+    <Suspense fallback={<span>Loading</span>}>
       <BrowserRouter>
         <div className="main-layout">
           <nav>
             <img src={logo} alt="logo" />
 
             <ul>
-              <li>
-                <CustomLink
-                  to="/"
+              {routes.map(({to,name})=>(
+                <li
+                key={to}
                 >
-                  Home
-                </CustomLink>
-              </li>
-              <li>
-                <CustomLink
-                  to="/about"
-                >
-                  About
-                </CustomLink>
-              </li>
-              <li>
-                <CustomLink
-                  to="/users"
-                >
-                  Users
-                </CustomLink>
-              </li>
+                  
+                  <CustomLink
+                  to={to}
+                  > {name}</CustomLink>
+                </li>
+              ))}
             </ul>
           </nav>
 
           <Routes>
-            <Route path="about" element={<h1>About Page</h1>} />
-            <Route path="users" element={<h1>User Page</h1>} />
-            <Route path="/" element={<h1>Home Page</h1>} />
+            {routes.map(route=>(
+            <Route 
+            key={route.name} 
+            path={route.path} 
+            element={<route.Component/>}  />
+            ))}
+           
+            <Route path="/*" element={<Navigate to={routes[0].to}/>}  />
           </Routes>
         </div>
       </BrowserRouter>
       ,
-    </>
+    </Suspense>
   );
 };
