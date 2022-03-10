@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import { ShoppinPage } from "../02-components-pattern/pages/ShoppinPage";
 
 
 interface Route{
@@ -13,6 +14,12 @@ const Lazy2 = lazy(()=>import(/*webpackChunkName: "LazyPage2"*/'../01-lazyload/p
 const Lazy3 = lazy(()=>import(/*webpackChunkName: "LazyPage3"*/'../01-lazyload/pages/LazyPage3'))
 
 export const routes:Route[] = [
+    {
+        to:'/',
+        path:'',
+        Component:ShoppinPage,
+        name:'Shopping'
+    },
     {
         to:'/lazy1',
         path:'lazy1',
@@ -31,4 +38,5 @@ export const routes:Route[] = [
         Component:Lazy3,
         name:'Lazy-3'
     },
+
 ]
