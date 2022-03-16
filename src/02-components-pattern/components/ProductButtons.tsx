@@ -3,9 +3,10 @@ import {  ProductContext } from "./ProductCard"
 import styles from "../styles/styles.module.css";
 
 export interface ProductButtonsProps{
-  className?:string
+  className?:string,
+  counter?:number
 }
-export const ProductButtons = ({className=""}:ProductButtonsProps)=>{
+export const ProductButtons = ({className="",counter:count}:ProductButtonsProps)=>{
 
     const {increaseBy,counter} = useContext(ProductContext)
   
@@ -16,7 +17,7 @@ export const ProductButtons = ({className=""}:ProductButtonsProps)=>{
             -
           </button>
   
-          <div className={styles.countLabel}>{counter}</div>
+          <div className={styles.countLabel}>{count?count:counter}</div>
           <button onClick={() => increaseBy(+1)} className={styles.buttonAdd}>
             +
           </button>

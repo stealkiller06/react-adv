@@ -22,3 +22,18 @@ import { ProductTitleProps } from "../components/ProductTitle";
     Image:(Props:ProductImageProps)=>JSX.Element,
     Buttons:(Props:ProductButtonsProps)=>JSX.Element
   }
+
+  export interface onChangeArgs {
+    product:Product,
+    count:number
+  }
+
+
+export interface ProductInCart extends Product {
+  count: number;
+}
+
+
+export interface ShoppingCart {
+  [key: string]: ProductInCart;
+}
